@@ -17,3 +17,29 @@ const slides = [
 	}
 ]
 
+const leftArrow=document.querySelector(".arrow_left");
+const rightArrow=document.querySelector(".arrow_right");
+
+
+//Ajoutez des Event Listeners sur les flèches 
+
+leftArrow.addEventListener("click", function gauche() {
+
+	alert("click à gauche");
+	
+})
+
+
+rightArrow.addEventListener("click", function droite() {
+
+	console.log("click à droite");
+	
+})
+
+
+
+
+
+
+//
+// Créez un élément div
