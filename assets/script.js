@@ -25,65 +25,105 @@ const firstSlide = slides.length + 1;
 const imageSlide = document.querySelector(".banner-img");
 const tagLine = document.querySelector("#banner p");
 const baseUrl = "./assets/images/slideshow/";
+let allDots;
 
-//Ajoutez des Event Listeners sur les flèches 
+function main() {
 
-leftArrow.addEventListener("click", function gauche() {
+	initDots();
+
+	prevSlide();
+
+	nextSlide();
+
+}
+
+main();
+
+//Ajoutez des Event Listeners sur les flèches
+
+/*leftArrow.addEventListener("click",  () => {
+
 	console.log("click à gauche");
 })
 
 rightArrow.addEventListener("click", function droite() {
+
 	console.log("click à droite");
-})
 
-//Ajoutez des bullet points au slider
+})*/
 
-for (let i = 0; i < slides.length; i++) {
-	// Créez un élément div
-	const nouveauDiv = document.createElement("div");
+function initDots() {
 
-	// Ajoutez la classe "dot" à l'élément div
-	nouveauDiv.className = "dot";
+	//Ajoutez des bullet points au slider
 
-	// Sélectionnez l'élément avec la classe "dots" et ajoutez l'élément div comme enfant
-	document.querySelector(".dots").appendChild(nouveauDiv);
+	for (let i = 0; i < slides.length; i++) {
+
+		// Créez un élément div
+
+		const nouveauDiv = document.createElement("div");
+
+		// Ajoutez la classe "dot" à l'élément div
+
+		nouveauDiv.className = "dot";
+
+		// Sélectionnez l'élément avec la classe "dots" et ajoutez l'élément div comme enfant
+
+		document.querySelector(".dots").appendChild(nouveauDiv);
+
+	}
+	//mettre le premier dot en selected
+	allDots = document.querySelectorAll(".dot");
+	allDots[index].classList.add("dot_selected");
+}
+function prevSlide() {
+
+	//Modifiez le slide au clic sur la flêche gauche
+
+	leftArrow.addEventListener("click", () => {
+
+		allDots[index].classList.remove("dot_selected");
+
+		if (index === 0) {
+
+			index = lastSlide;
+
+		}
+		else {
+
+			index--;
+
+		}
+		updateContentSlide();
+	});
+}
+
+function nextSlide() {
+	//Modifiez le slide au clic sur la flêche droite
+	rightArrow.addEventListener("click", () => {
+
+		allDots[index].classList.remove("dot_selected");
+
+		if (index === lastSlide) {
+			index = 0;
+		}
+		else {
+			index++;
+		}
+		updateContentSlide();
+	});
 
 }
-//Modifiez le slide au clic sur la flêche gauche
-const allDots = document.querySelectorAll(".dot");
-allDots[index].classList.add("dot_selected");
-leftArrow.addEventListener("click", function gauche() {
-	allDots[index].classList.remove("dot_selected");
-
-	if (index === 0) {
-		index = lastSlide;
-	}
-	else {
-		index--;
-	}
+function updateContentSlide() {
 
 	allDots[index].classList.add("dot_selected");
+
 	imageSlide.src = baseUrl + slides[index].image;
+
 	tagLine.innerHTML = slides[index].tagLine;
 
-});
+}
 
-//Modifiez le slide au clic sur la flêche droite
-rightArrow.addEventListener("click", function droite() {
-	allDots[index].classList.remove("dot_selected");
 
-	if (index === lastSlide) {
-		index = 0;
-	}
-	else {
-		index++;
-	}
-
-	allDots[index].classList.add("dot_selected");
-	imageSlide.src = baseUrl + slides[index].image;
-	tagLine.innerHTML = slides[index].tagLine;
-
-});
 
 
 
